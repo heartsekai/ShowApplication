@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using CSWPFAutoCompleteTextBox;
+using System.Linq;
 
 namespace ShowApplication
 {
@@ -27,6 +29,15 @@ namespace ShowApplication
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
             ProcessList = new List<Process>( Process.GetProcesses() );
+
+            foreach (Process item in ProcessList)
+            {
+                if (!SearchBox.AutoSuggestionList.Contains(item.ProcessName))
+                {
+                    SearchBox.AutoSuggestionList.Add(item.ProcessName);
+                }
+            }
+            
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -54,7 +65,7 @@ namespace ShowApplication
 
                     if (hWnd != IntPtr.Zero)
                     {
-                        ShowWindowAsync(hWnd, 10);
+                        ShowWindowAsync(hWnd, 2);
                         ShowWindowAsync(hWnd, 1);
 
                         Close();
@@ -62,7 +73,7 @@ namespace ShowApplication
                 }
                 else
                 {
-                    SearchBox.AppendText(" not Found.");
+                    SearchBox.Text += " not Found.";
                 }
                 // TODO: if not process found start a new one
             }
