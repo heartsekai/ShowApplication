@@ -1,7 +1,9 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /ShowApplication/obj/Debug
 /ShowApplication/bin/Debug
 /.vs/ShowApplication/v15
+ShowApplication/bin/
+ShowApplication/obj/

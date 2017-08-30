@@ -6,6 +6,6 @@
         xmlns:local="clr-namespace:ShowApplication"
         mc:Ignorable="d" Height="40.858" Width="325.942" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None">
     <Grid FocusManager.FocusedElement="{Binding ElementName=SearchBox}">
-        <TextBox x:Name="SearchBox" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="30" FontFamily="Consolas" KeyDown="SearchBox_KeyDown" Background="#FFFFCB41" />
+        <TextBox x:Name="SearchBox" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="30" FontFamily="Consolas" Background="#FFFFCB41" KeyUp="SearchBox_KeyUp" />
     </Grid>
 </Window>
