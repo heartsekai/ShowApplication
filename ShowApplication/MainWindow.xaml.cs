@@ -28,7 +28,8 @@ namespace ShowApplication
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
-            ProcessList = new List<Process>( Process.GetProcesses() );
+            // Get Only Processes with a Window attached.
+            ProcessList = new List<Process>( Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero) );
 
             foreach (Process item in ProcessList)
             {

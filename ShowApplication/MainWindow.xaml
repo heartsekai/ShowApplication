@@ -8,6 +8,6 @@
         xmlns:local="clr-namespace:ShowApplication"
         mc:Ignorable="d" Height="40.858" Width="325.942" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None">
     <Grid>
-        <UC:AutoCompleteTextBox x:Name="SearchBox" KeyUp="SearchBox_KeyUp"/>
+        <UC:AutoCompleteTextBox x:Name="SearchBox" KeyUp="SearchBox_KeyUp" />
     </Grid>
 </Window>
