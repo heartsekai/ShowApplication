@@ -51,7 +51,7 @@ namespace ShowApplication
         {
             if (e.Key == Key.Enter)
             {
-                Process[] processByName = ProcessList.FindAll(x => x.ProcessName.ToLower().Contains(SearchBox.Text.ToLower())).ToArray();
+                Process[] processByName = ProcessList.FindAll(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower())).ToArray();
 
                 if (processByName.Length > 0)
                 {
