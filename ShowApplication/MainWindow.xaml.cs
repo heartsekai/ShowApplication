@@ -17,8 +17,10 @@ namespace ShowApplication
 
     public partial class MainWindow : Window
     {
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll",SetLastError = true,CharSet = CharSet.Auto)]
         static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
 
         List<Process> ProcessList;
 
@@ -51,26 +53,24 @@ namespace ShowApplication
         {
             if (e.Key == Key.Enter)
             {
-                Process[] processByName = ProcessList.FindAll(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower())).ToArray();
+                Process processByName = ProcessList.Find(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower()));
 
-                if (processByName.Length > 0)
+                if (processByName != null)
                 {
-                    IntPtr hWnd = IntPtr.Zero;
-                    foreach (Process item in processByName)
-                    {
-                        if (item.MainWindowHandle != IntPtr.Zero)
-                        {
-                            hWnd = item.MainWindowHandle;
-                        }
-                    }
+                    IntPtr hWnd = processByName.MainWindowHandle;
+                    
+                    //https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
+                    // SW_SHOWMINIMIZED
+                    ShowWindowAsync(hWnd, 2);
+                    // SW_RESTORE
+                    ShowWindowAsync(hWnd, 9);
+                    // SW_SHOWNORMAL
+                    ShowWindowAsync(hWnd, 1);
 
-                    if (hWnd != IntPtr.Zero)
-                    {
-                        ShowWindowAsync(hWnd, 2);
-                        ShowWindowAsync(hWnd, 1);
+                    // just in case we set it on the forground
+                    SetForegroundWindow(hWnd);
 
-                        Close();
-                    }
+                    Close();
                 }
                 else
                 {
