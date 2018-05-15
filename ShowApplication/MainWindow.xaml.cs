@@ -61,11 +61,11 @@ namespace ShowApplication
 
                     //https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
                     // SW_SHOWMINIMIZED
-                    ShowWindowAsync(hWnd, 2);
+                    //ShowWindowAsync(hWnd, 2);
                     // SW_RESTORE
-                    ShowWindowAsync(hWnd, 9);
+                    //ShowWindowAsync(hWnd, 9);
                     // SW_SHOWNORMAL
-                    ShowWindowAsync(hWnd, 1);
+                    //ShowWindowAsync(hWnd, 1);
 
                     // just in case we set it on the forground
                     SetForegroundWindow(hWnd);
