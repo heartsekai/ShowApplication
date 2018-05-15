@@ -53,12 +53,12 @@ namespace ShowApplication
         {
             if (e.Key == Key.Enter)
             {
-                Process processByName = ProcessList.Find(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower()));
+                var processByName = ProcessList.Find(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower()));
 
                 if (processByName != null)
                 {
-                    IntPtr hWnd = processByName.MainWindowHandle;
-                    
+                    var hWnd = processByName.MainWindowHandle;
+
                     //https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
                     // SW_SHOWMINIMIZED
                     ShowWindowAsync(hWnd, 2);
