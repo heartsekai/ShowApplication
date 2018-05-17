@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using CSWPFAutoCompleteTextBox;
 using System.Linq;
 
 namespace ShowApplication
@@ -46,7 +45,7 @@ namespace ShowApplication
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Close();
+                Hide();
         }
 
         private void SearchBox_KeyUp(object sender, KeyEventArgs e)
@@ -81,6 +80,23 @@ namespace ShowApplication
             else if (SearchBox.Text.Contains("not Found") || e.Key == Key.Back)
             {
                 SearchBox.Text = "";
+            }
+        }
+
+        private void Applicaltion_Close(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Toogle_Visible(object sender, RoutedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
             }
         }
     }

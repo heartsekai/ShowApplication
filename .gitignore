@@ -7,3 +7,5 @@
 /.vs/ShowApplication/v15
 ShowApplication/bin/
 ShowApplication/obj/
+packages/
+.vs/ShowApplication/DesignTimeBuild/.dtbcache
