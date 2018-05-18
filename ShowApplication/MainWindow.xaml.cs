@@ -69,7 +69,7 @@ namespace ShowApplication
                     // just in case we set it on the forground
                     SetForegroundWindow(hWnd);
 
-                    Close();
+                    Hide();
                 }
                 else
                 {
