@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Linq;
+using ShowApplication.Model;
 
 namespace ShowApplication
 {
@@ -16,12 +17,7 @@ namespace ShowApplication
 
     public partial class MainWindow : Window
     {
-        [DllImport("user32.dll",SetLastError = true,CharSet = CharSet.Auto)]
-        static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
-        [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        List<Process> ProcessList;
+        private ProcessCollection processCollection;
 
         public MainWindow()
         {
@@ -29,51 +25,45 @@ namespace ShowApplication
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
-            // Get Only Processes with a Window attached.
-            ProcessList = new List<Process>( Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero) );
+            processCollection = new ProcessCollection();
+            PopulateSearchBox();
+        }
 
-            foreach (Process item in ProcessList)
+        private void PopulateSearchBox()
+        {
+
+            processCollection.RefreshProcessList();
+
+
+            foreach (Process item in processCollection.GetProcessesWithWindow())
             {
                 if (!SearchBox.AutoSuggestionList.Contains(item.ProcessName))
                 {
                     SearchBox.AutoSuggestionList.Add(item.ProcessName);
                 }
             }
-            
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Hide();
+                HideAndReset();
         }
 
         private void SearchBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                var processByName = ProcessList.Find(x => x.ProcessName.ToLower().StartsWith(SearchBox.Text.ToLower()));
+                var processByName = processCollection.GetProcessByName(SearchBox.Text);
 
                 if (processByName != null)
                 {
-                    var hWnd = processByName.MainWindowHandle;
-
-                    //https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
-                    // SW_SHOWMINIMIZED
-                    //ShowWindowAsync(hWnd, 2);
-                    // SW_RESTORE
-                    //ShowWindowAsync(hWnd, 9);
-                    // SW_SHOWNORMAL
-                    //ShowWindowAsync(hWnd, 1);
-
-                    // just in case we set it on the forground
-                    SetForegroundWindow(hWnd);
-
-                    Hide();
+                    WindowManager.RestoreWindow(processByName);
+                    HideAndReset();
                 }
                 else
                 {
-                    SearchBox.Text += " not Found.";
+                    SearchBox.Text = "not Found";
                 }
                 // TODO: if not process found start a new one
             }
@@ -83,23 +73,20 @@ namespace ShowApplication
             }
         }
 
+        private void HideAndReset()
+        {
+            // Empty Suggestions
+            if (SearchBox.AutoSuggestionList.Count > 1)
+            {
+                SearchBox.AutoSuggestionList.Clear();
+            }
+            SearchBox.Text = "";
+            Hide();
+        }
+
         private void Applicaltion_Close(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        private void Toogle_Visible(object sender, RoutedEventArgs e)
-        {
-            if (this.IsVisible)
-            {
-                Hide();
-            }
-            else
-            {
-                Show();
-            }
-        }
     }
-
-
 }
