@@ -19,11 +19,21 @@ namespace ShowApplication.ViewModels.Command
         {
             var mainWindow = (MainWindow)Window;
             var selectedProcess = Process.GetProcesses()
-                .Where(process => process.MainWindowHandle != IntPtr.Zero)
+                .Where(ProcessHasWindow())
                 .ToList()
-                .Find(name => name.ProcessName.ToLower().StartsWith(mainWindow.SearchBox.Text.ToLower()));
+                .Find(FirstProcess(mainWindow.SearchBox.Text));
             if (selectedProcess != null)
                 WindowManager.RestoreWindow(selectedProcess);
+        }
+
+        private Func<Process,bool> ProcessHasWindow()
+        {
+            return process => process.MainWindowHandle != IntPtr.Zero;
+        }
+
+        private Predicate<Process> FirstProcess(String processName)
+        {
+            return process => process.ProcessName.ToLower().StartsWith(processName.ToLower());
         }
     }
 }
