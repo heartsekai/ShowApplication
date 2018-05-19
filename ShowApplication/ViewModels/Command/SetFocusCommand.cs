@@ -17,11 +17,11 @@ namespace ShowApplication.ViewModels.Command
 
         public void Execute(object Window)
         {
-            var mainWindow = (MainWindow)Window;
+            var processName = ((MainWindow)Window).SearchBox.Text;
             var selectedProcess = Process.GetProcesses()
                 .Where(ProcessHasWindow())
                 .ToList()
-                .Find(FirstProcess(mainWindow.SearchBox.Text));
+                .Find(First(processName));
             if (selectedProcess != null)
                 WindowManager.RestoreWindow(selectedProcess);
         }
@@ -31,7 +31,7 @@ namespace ShowApplication.ViewModels.Command
             return process => process.MainWindowHandle != IntPtr.Zero;
         }
 
-        private Predicate<Process> FirstProcess(String processName)
+        private Predicate<Process> First(String processName)
         {
             return process => process.ProcessName.ToLower().StartsWith(processName.ToLower());
         }
