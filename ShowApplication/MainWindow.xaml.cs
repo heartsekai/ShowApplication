@@ -33,9 +33,9 @@ namespace ShowApplication
         private void KeyHandler(object sender, KeyEventArgs e)
         {
             ICommand command = null;
-            if (e.Key == Key.Escape && viewModelBase.TogleVisible.CanExecute(null))
+            if (e.Key == Key.Escape)
                 command = new TogleVisibilityCommand();
-            else if (e.Key == Key.Enter && viewModelBase.SetFocus.CanExecute(null))
+            else if (e.Key == Key.Enter)
             {
                 command = new SetFocusCommand();
 
