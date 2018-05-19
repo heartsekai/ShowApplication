@@ -6,15 +6,10 @@
             xmlns:UC="clr-namespace:CSWPFAutoCompleteTextBox.UserControls"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:vm="clr-namespace:ShowApplication"
-        mc:Ignorable="d" Height="40.858" Width="325.942" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None">
         mc:Ignorable="d" Height="40.858" Width="325.942" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None" Visibility="Hidden">
 
-    <Window.DataContext>
-        <vm:ViewModelBase/>
-    </Window.DataContext>
-    
     <Window.InputBindings>
-        <KeyBinding Gesture="Ctrl+D" Command="{Binding TogleVisible}" 
+        <KeyBinding Gesture="Ctrl+D" Command="{Binding WakeUp}" 
                     HotkeyManager.RegisterGlobalHotkey="True" />
     </Window.InputBindings>
     <Grid>

@@ -17,7 +17,7 @@ namespace ShowApplication
 
     public partial class MainWindow : Window
     {
-        private ProcessCollection processCollection;
+        private ViewModelBase viewModelBase;
 
         public MainWindow()
         {
@@ -25,23 +25,8 @@ namespace ShowApplication
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
-            processCollection = new ProcessCollection();
-            PopulateSearchBox();
-        }
-
-        private void PopulateSearchBox()
-        {
-
-            processCollection.RefreshProcessList();
-
-
-            foreach (Process item in processCollection.GetProcessesWithWindow())
-            {
-                if (!SearchBox.AutoSuggestionList.Contains(item.ProcessName))
-                {
-                    SearchBox.AutoSuggestionList.Add(item.ProcessName);
-                }
-            }
+            viewModelBase = new ViewModelBase();
+            this.DataContext = viewModelBase;
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -54,7 +39,7 @@ namespace ShowApplication
         {
             if (e.Key == Key.Enter)
             {
-                var processByName = processCollection.GetProcessByName(SearchBox.Text);
+                var processByName = viewModelBase.GetProcessByNameWithWindow(SearchBox.Text);
 
                 if (processByName != null)
                 {

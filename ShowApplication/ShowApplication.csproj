@@ -83,8 +83,9 @@
     </ApplicationDefinition>
     <Compile Include="Model\ProcessCollection.cs" />
     <Compile Include="Model\WindowManager.cs" />
-    <Compile Include="ViewModels\Command\TogleVisibleCommand.cs" />
+    <Compile Include="ViewModels\Command\TogleVisibilityCommand.cs" />
     <Compile Include="UserControls\AutoCompleteTextBox.cs" />
+    <Compile Include="ViewModels\Command\WakeUpCommand.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
