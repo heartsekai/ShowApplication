@@ -13,6 +13,7 @@ namespace ShowApplication
     {
         public ICommand TogleVisible { get; set; }
         public ICommand WakeUp { get; set; }
+        public ICommand SetFocus { get; set; }
         private MainWindow MainWindow;
 
         public ViewModelBase()
@@ -20,6 +21,7 @@ namespace ShowApplication
             this.MainWindow = Application.Current.MainWindow as MainWindow;
             TogleVisible = new TogleVisibilityCommand(this.MainWindow);
             WakeUp = new WakeUpCommand(this.MainWindow);
+            SetFocus = new SetFocusCommand();
         }
 
         public Process GetProcessByNameWithWindow(String processName)

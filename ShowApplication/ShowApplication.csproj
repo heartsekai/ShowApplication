@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\ProcessCollection.cs" />
     <Compile Include="Model\WindowManager.cs" />
+    <Compile Include="ViewModels\Command\SetFocusCommand.cs" />
     <Compile Include="ViewModels\Command\TogleVisibilityCommand.cs" />
     <Compile Include="UserControls\AutoCompleteTextBox.cs" />
     <Compile Include="ViewModels\Command\WakeUpCommand.cs" />

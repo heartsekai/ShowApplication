@@ -37,25 +37,12 @@ namespace ShowApplication
 
         private void SearchBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter && viewModelBase.SetFocus.CanExecute(null))
             {
-                var processByName = viewModelBase.GetProcessByNameWithWindow(SearchBox.Text);
+                viewModelBase.SetFocus.Execute(SearchBox.Text);
 
-                if (processByName != null)
-                {
-                    WindowManager.RestoreWindow(processByName);
-                    if (viewModelBase.TogleVisible.CanExecute(null))
-                        viewModelBase.TogleVisible.Execute(null);
-                }
-                else
-                {
-                    SearchBox.Text = "not Found";
-                }
-                // TODO: if not process found start a new one
-            }
-            else if (SearchBox.Text.Contains("not Found") || e.Key == Key.Back)
-            {
-                SearchBox.Text = "";
+                if (viewModelBase.TogleVisible.CanExecute(null))
+                    viewModelBase.TogleVisible.Execute(null);
             }
         }
 
