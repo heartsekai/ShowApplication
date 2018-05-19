@@ -36,6 +36,10 @@ namespace ShowApplication.ViewModels.Command
 
         private void PopulateSearchBox()
         {
+            MainWindow.SearchBox.AutoSuggestionList.Clear();
+
+            MainWindow.SearchBox.Text = string.Empty;
+
             foreach (Process item in Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero))
             {
                 if (!MainWindow.SearchBox.AutoSuggestionList.Contains(item.ProcessName))

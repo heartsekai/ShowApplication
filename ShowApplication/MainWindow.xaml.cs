@@ -31,8 +31,8 @@ namespace ShowApplication
 
         private void HandleEsc(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
-                HideAndReset();
+            if (e.Key == Key.Escape && viewModelBase.TogleVisible.CanExecute(null))
+                viewModelBase.TogleVisible.Execute(null);
         }
 
         private void SearchBox_KeyUp(object sender, KeyEventArgs e)
@@ -44,7 +44,8 @@ namespace ShowApplication
                 if (processByName != null)
                 {
                     WindowManager.RestoreWindow(processByName);
-                    HideAndReset();
+                    if (viewModelBase.TogleVisible.CanExecute(null))
+                        viewModelBase.TogleVisible.Execute(null);
                 }
                 else
                 {
@@ -56,17 +57,6 @@ namespace ShowApplication
             {
                 SearchBox.Text = "";
             }
-        }
-
-        private void HideAndReset()
-        {
-            // Empty Suggestions
-            if (SearchBox.AutoSuggestionList.Count > 1)
-            {
-                SearchBox.AutoSuggestionList.Clear();
-            }
-            SearchBox.Text = "";
-            Hide();
         }
 
         private void Applicaltion_Close(object sender, RoutedEventArgs e)
