@@ -33,11 +33,7 @@ namespace ShowApplication
         {
             if (e.Key == Key.Escape && viewModelBase.TogleVisible.CanExecute(null))
                 viewModelBase.TogleVisible.Execute(null);
-        }
-
-        private void SearchBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter && viewModelBase.SetFocus.CanExecute(null))
+            else if (e.Key == Key.Enter && viewModelBase.SetFocus.CanExecute(null))
             {
                 viewModelBase.SetFocus.Execute(SearchBox.Text);
 

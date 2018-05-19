@@ -13,7 +13,7 @@
                     HotkeyManager.RegisterGlobalHotkey="True" />
     </Window.InputBindings>
     <Grid>
-        <UC:AutoCompleteTextBox x:Name="SearchBox" KeyUp="SearchBox_KeyUp" />
+        <UC:AutoCompleteTextBox x:Name="SearchBox" />
         <tb:TaskbarIcon IconSource="/ShowApplication.ico" DoubleClickCommand="{Binding TogleVisible}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
