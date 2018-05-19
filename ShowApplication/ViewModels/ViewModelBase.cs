@@ -23,15 +23,5 @@ namespace ShowApplication
             WakeUp = new WakeUpCommand(this.MainWindow);
             SetFocus = new SetFocusCommand();
         }
-
-        public Process GetProcessByNameWithWindow(String processName)
-        {
-            return Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero).ToList().Find(x => x.ProcessName.ToLower().StartsWith(processName.ToLower()));
-        }
-
-        public List<Process> GetProcessesWithWindow()
-        {
-            return Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero).ToList();
-        }
     }
 }
