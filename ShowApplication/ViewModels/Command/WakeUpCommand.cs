@@ -31,6 +31,7 @@ namespace ShowApplication.ViewModels.Command
         internal void WakeUp()
         {
             MainWindow.Show();
+            MainWindow.Activate();
             PopulateSearchBox();
         }
 
