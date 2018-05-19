@@ -15,11 +15,15 @@ namespace ShowApplication.ViewModels.Command
             return true;
         }
 
-        public void Execute(object processName)
+        public void Execute(object Window)
         {
-            var process = Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero).ToList().Find(x => x.ProcessName.ToLower().StartsWith(((String)processName).ToLower()));
-            if (process != null)
-                WindowManager.RestoreWindow(process);
+            var mainWindow = (MainWindow)Window;
+            var selectedProcess = Process.GetProcesses()
+                .Where(process => process.MainWindowHandle != IntPtr.Zero)
+                .ToList()
+                .Find(name => name.ProcessName.ToLower().StartsWith(mainWindow.SearchBox.Text.ToLower()));
+            if (selectedProcess != null)
+                WindowManager.RestoreWindow(selectedProcess);
         }
     }
 }

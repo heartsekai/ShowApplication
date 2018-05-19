@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Linq;
 using ShowApplication.Model;
+using ShowApplication.ViewModels.Command;
 
 namespace ShowApplication
 {
@@ -31,14 +32,18 @@ namespace ShowApplication
 
         private void KeyHandler(object sender, KeyEventArgs e)
         {
+            ICommand command = null;
             if (e.Key == Key.Escape && viewModelBase.TogleVisible.CanExecute(null))
-                viewModelBase.TogleVisible.Execute(this);
+                command = new TogleVisibilityCommand();
             else if (e.Key == Key.Enter && viewModelBase.SetFocus.CanExecute(null))
             {
-                viewModelBase.SetFocus.Execute(SearchBox.Text);
+                command = new SetFocusCommand();
 
-                if (viewModelBase.TogleVisible.CanExecute(null))
                     viewModelBase.TogleVisible.Execute(this);
+            }
+            if (command != null)
+            {
+                command.Execute(this);
             }
         }
 
