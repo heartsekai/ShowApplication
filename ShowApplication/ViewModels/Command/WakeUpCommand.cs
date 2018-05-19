@@ -9,13 +9,6 @@ namespace ShowApplication.ViewModels.Command
 {
     class WakeUpCommand : ICommand
     {
-        public WakeUpCommand(MainWindow mainWindow)
-        {
-            this.MainWindow = mainWindow;
-        }
-
-        public MainWindow MainWindow { get; }
-
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -25,27 +18,27 @@ namespace ShowApplication.ViewModels.Command
 
         public void Execute(object parameter)
         {
-            WakeUp();
+            WakeUp((MainWindow)parameter);
         }
 
-        internal void WakeUp()
+        internal void WakeUp(MainWindow mainWindow)
         {
-            MainWindow.Show();
-            MainWindow.Activate();
-            PopulateSearchBox();
+            mainWindow.Show();
+            mainWindow.Activate();
+            PopulateSearchBox(mainWindow);
         }
 
-        private void PopulateSearchBox()
+        private void PopulateSearchBox(MainWindow mainWindow)
         {
-            MainWindow.SearchBox.AutoSuggestionList.Clear();
+            mainWindow.SearchBox.AutoSuggestionList.Clear();
 
-            MainWindow.SearchBox.Text = string.Empty;
+            mainWindow.SearchBox.Text = string.Empty;
 
             foreach (Process item in Process.GetProcesses().Where(x => x.MainWindowHandle != IntPtr.Zero))
             {
-                if (!MainWindow.SearchBox.AutoSuggestionList.Contains(item.ProcessName))
+                if (!mainWindow.SearchBox.AutoSuggestionList.Contains(item.ProcessName))
                 {
-                    MainWindow.SearchBox.AutoSuggestionList.Add(item.ProcessName);
+                    mainWindow.SearchBox.AutoSuggestionList.Add(item.ProcessName);
                 }
             }
         }

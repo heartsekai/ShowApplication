@@ -19,8 +19,8 @@ namespace ShowApplication
         public ViewModelBase()
         {
             this.MainWindow = Application.Current.MainWindow as MainWindow;
-            TogleVisible = new TogleVisibilityCommand(this.MainWindow);
-            WakeUp = new WakeUpCommand(this.MainWindow);
+            TogleVisible = new TogleVisibilityCommand();
+            WakeUp = new WakeUpCommand();
             SetFocus = new SetFocusCommand();
         }
     }

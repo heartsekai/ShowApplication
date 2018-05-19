@@ -9,12 +9,12 @@
         mc:Ignorable="d" Height="40.858" Width="325.942" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None" Visibility="Hidden">
 
     <Window.InputBindings>
-        <KeyBinding Gesture="Ctrl+D" Command="{Binding WakeUp}" 
+        <KeyBinding Gesture="Ctrl+D" Command="{Binding WakeUp}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                     HotkeyManager.RegisterGlobalHotkey="True" />
     </Window.InputBindings>
     <Grid>
         <UC:AutoCompleteTextBox x:Name="SearchBox" />
-        <tb:TaskbarIcon IconSource="/ShowApplication.ico" DoubleClickCommand="{Binding TogleVisible}">
+        <tb:TaskbarIcon IconSource="/ShowApplication.ico" DoubleClickCommand="{Binding TogleVisible}" DoubleClickCommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Close" Click="Applicaltion_Close" />

@@ -81,7 +81,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ProcessCollection.cs" />
     <Compile Include="Model\WindowManager.cs" />
     <Compile Include="ViewModels\Command\SetFocusCommand.cs" />
     <Compile Include="ViewModels\Command\TogleVisibilityCommand.cs" />

@@ -6,30 +6,23 @@ namespace ShowApplication
 {
     public class TogleVisibilityCommand : ICommand
     {
-        public TogleVisibilityCommand(MainWindow mainWindow)
-        {
-            this.MainWindow = mainWindow;
-        }
-
-        public MainWindow MainWindow { get; }
-
         public event EventHandler CanExecuteChanged;
-
 
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object window)
         {
-            if (this.MainWindow.IsVisible)
+            var mainWindow = (MainWindow)window;
+            if (mainWindow.IsVisible)
             {
-                this.MainWindow.Hide();
+                mainWindow.Hide();
             }
             else
             {
-                this.MainWindow.Show();
+               mainWindow.Show();
             }
         }
     }
