@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace ShowApplication
+namespace ShowApplication.ViewModels.Command
 {
     public class TogleVisibilityCommand : ICommand
     {
