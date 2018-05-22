@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Linq;
-using ShowApplication.Model;
 using ShowApplication.ViewModels.Command;
 
 namespace ShowApplication
