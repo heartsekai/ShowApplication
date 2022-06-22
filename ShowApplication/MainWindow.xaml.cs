@@ -31,9 +31,18 @@ namespace ShowApplication
                 command = new TogleVisibilityCommand();
             else if (e.Key == Key.Enter)
             {
-                command = new SetFocusCommand();
+                string processFound = "";
+                foreach (string item in SearchBox.AutoSuggestionList)
+                {
+                    if (item.StartsWith(SearchBox.Text)) { processFound = item; }
+                }
+                if (string.IsNullOrEmpty(processFound))
+                    command = new StartApplicationCommand(); 
+                else
+                    command = new SetFocusCommand();
 
-                    viewModelBase.TogleVisible.Execute(this);
+
+                viewModelBase.TogleVisible.Execute(this);
             }
             if (command != null)
             {

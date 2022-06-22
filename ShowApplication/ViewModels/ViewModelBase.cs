@@ -1,9 +1,4 @@
-﻿using ShowApplication.Model;
-using ShowApplication.ViewModels.Command;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using ShowApplication.ViewModels.Command;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,6 +9,7 @@ namespace ShowApplication
         public ICommand TogleVisible { get; set; }
         public ICommand WakeUp { get; set; }
         public ICommand SetFocus { get; set; }
+        public ICommand StartApplication { get; set; }
         private MainWindow MainWindow;
 
         public ViewModelBase()
@@ -22,6 +18,7 @@ namespace ShowApplication
             TogleVisible = new TogleVisibilityCommand();
             WakeUp = new WakeUpCommand();
             SetFocus = new SetFocusCommand();
+            StartApplication = new StartApplicationCommand();
         }
     }
 }
